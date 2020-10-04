@@ -13,27 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/bankaccount")
 public class BankAccountController {
 
-    private BankAccountService bankAccountService;
+    private BankAccountService accountService;
 
-    public BankAccountController(BankAccountService bankAccountService) {
-        this.bankAccountService = bankAccountService;
+    public BankAccountController(BankAccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping
-    public String getBankAccountPage(Model model){
-        model.addAttribute("allBankAccount",bankAccountService.getBankAccount());
+    public String getBankAccountPage(Model model) {
+        model.addAttribute("bankaccounts", accountService.getBankAccounts());
         return "bankaccount";
     }
 
     @PostMapping
-    public String openBankAccount (@ModelAttribute BankAccount bankAccount
-            ,Model model){
-
-        System.out.print(bankAccount);
-
-        bankAccountService.CreateBankAccount(bankAccount);
-        model.addAttribute("allBankAccount",bankAccountService.getBankAccount());
-
+    public String openAccount(@ModelAttribute BankAccount bankAccount, Model model) {
+        accountService.openAccount(bankAccount);
+        model.addAttribute("bankaccounts",accountService.getBankAccounts());
         return "redirect:bankaccount";
     }
 }
+
