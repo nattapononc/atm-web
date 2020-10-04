@@ -49,8 +49,11 @@
             <td th:text="${account.type}"></td>
             <td th:text="${account.balance}"></td>
             <td>
-                <a class="btn btn-primary"
-                   th:href="@{/bankaccount/edit/{id}(id=${account.id})}">Edit</a>
+                <a class="btn btn-primary" th:href="@{/bankaccount/edit/{id}(id=${bankAccount.id})}">Edit</a>
+                <form class="form-inline" method="POST" onsubmit="return confirm('Are you sure you want to delete ?');"
+                      style="display: inline;" th:action="@{/bankaccount/delete/{id}(id=${bankAccount.id})}">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
             </td>
         </tr>
         </tbody>
